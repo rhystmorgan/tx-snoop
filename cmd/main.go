@@ -56,16 +56,20 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
-func headerStyle(s string) string {
+func headerStyle(m model) string {
 	decorationStyle := lipgloss.NewStyle().
+		Width(m.width - 2).
+		Height(m.height - 2).
+		Align(lipgloss.Center).
 		Foreground(lipgloss.Color(colour.Colours.Peach)).
-		SetString(s)
+		Border(lipgloss.HiddenBorder()).
+		SetString(m.header)
 
 	return decorationStyle.Render()
 }
 
 func (m model) View() string {
-	s := headerStyle(m.header)
+	s := headerStyle(m)
 
 	return s
 }
@@ -74,7 +78,7 @@ func main() {
 	p := tea.NewProgram(initModel())
 
 	if _, err := p.Run(); err != nil {
-		fmt.Print("There has been an error: %v", err)
+		fmt.Printf("There has been an error: %v", err)
 		os.Exit(1)
 	}
 }
