@@ -17,8 +17,7 @@ func InitBlockfrost(key string) blockfrost.APIClient {
 	return api
 }
 
-func GetTransactions(key string) []blockfrost.AddressUTXO {
-	address := "addr_test1vqlhvhcwaddssxnkfugwlvmk69925xjdx7nc20j2nzuc0gq43pzgq"
+func GetTransactions(address, key string) []blockfrost.AddressUTXO {
 
 	txCh := InitBlockfrost(key).AddressUTXOsAll(context.TODO(), address)
 
